@@ -9,3 +9,22 @@ except FileNotFoundError:
   st.error("Error: 'Salidafinal.xlsx' not found. Please check the file path.")
 except Exception as e:
   st.error(f"An error occurred: {e}")
+
+# prompt: Leer archivo Salidafinal.xlsx
+
+import pandas as pd
+
+# Assuming 'Region' and 'Sales' are column names in your DataFrame
+try:
+    sales_by_region = df.groupby('Region')['Sales'].sum()
+    plt.figure(figsize=(10, 6))  # Adjust figure size as needed
+    plt.bar(sales_by_region.index, sales_by_region.values)
+    plt.xlabel('Region')
+    plt.ylabel('Total Sales')
+    plt.title('Sales by Region')
+    plt.xticks(rotation=45, ha='right')  # Rotate x-axis labels for better readability
+    st.pyplot(plt)  # Display the plot in Streamlit
+except KeyError:
+    st.error("Error: 'Region' or 'Sales' column not found in the DataFrame.")
+except Exception as e:
+    st.error(f"An error occurred while creating the plot: {e}")
