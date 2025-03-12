@@ -10,25 +10,15 @@ except FileNotFoundError:
 except Exception as e:
   st.error(f"An error occurred: {e}")
 
-# prompt: crear una grafica de las ventas por region del dataframe df
+# prompt: crear una grafica de las ventas por region del dataframe df usando streamlit
 
-import matplotlib.pyplot as plt
-
-# prompt: Leer archivo Salidafinal.xlsx
-
-import pandas as pd
+import plotly.express as px
 
 # Assuming 'Region' and 'Sales' are column names in your DataFrame
 try:
-    sales_by_region = df.groupby('Region')['Sales'].sum()
-    plt.figure(figsize=(10, 6))  # Adjust figure size as needed
-    plt.bar(sales_by_region.index, sales_by_region.values)
-    plt.xlabel('Region')
-    plt.ylabel('Total Sales')
-    plt.title('Sales by Region')
-    plt.xticks(rotation=45, ha='right')  # Rotate x-axis labels for better readability
-    st.pyplot(plt)  # Display the plot in Streamlit
-except KeyError:
-    st.error("Error: 'Region' or 'Sales' column not found in the DataFrame.")
+  fig = px.bar(df, x='Region', y='Sales', title='Ventas por Región')
+  st.plotly_chart(fig)
+except KeyError as e:
+  st.error(f"Error: Column '{e}' not found in the DataFrame. Please check the column names.")
 except Exception as e:
-    st.error(f"An error occurred while creating the plot: {e}")
+  st.error(f"An error occurred while creating the chart: {e}")
