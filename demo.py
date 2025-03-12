@@ -10,6 +10,10 @@ except FileNotFoundError:
 except Exception as e:
   st.error(f"An error occurred: {e}")
 
+# prompt: crear una grafica de las ventas por region del dataframe df
+
+import matplotlib.pyplot as plt
+
 # prompt: Leer archivo Salidafinal.xlsx
 
 import pandas as pd
