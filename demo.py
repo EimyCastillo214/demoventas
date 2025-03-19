@@ -33,6 +33,6 @@ filtered_df = df[(df['Region'] == selected_region) & (df['State'] == selected_st
 # Display the filtered results
 if not filtered_df.empty:
   st.write("Filtered Results:")
-  st.dataframe(filtered_df.head(1))  # Display only the first row
+  st.dataframe(filtered_df)  # Display only the first row
 else:
   st.write("No results found for the selected criteria.")
