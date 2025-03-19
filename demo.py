@@ -22,3 +22,17 @@ except KeyError as e:
   st.error(f"Error: Column '{e}' not found in the DataFrame. Please check the column names.")
 except Exception as e:
   st.error(f"An error occurred while creating the chart: {e}")
+
+# Crear un filtro de selección múltiple para la columna 'Region'
+regiones = df['Region'].unique()
+regiones_seleccionadas = st.multiselect('Selecciona una o más regiones', regiones)
+
+# Filtrar el dataframe basado en las regiones seleccionadas
+if regiones_seleccionadas:
+    df_filtrado = df[df['Region'].isin(regiones_seleccionadas)]
+else:
+    df_filtrado = df
+
+# Mostrar el dataframe filtrado
+st.write('DataFrame Filtrado:')
+st.dataframe(df_filtrado)
