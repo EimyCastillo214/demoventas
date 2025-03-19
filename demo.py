@@ -23,6 +23,8 @@ except KeyError as e:
 except Exception as e:
   st.error(f"An error occurred while creating the chart: {e}")
 
+with st.sidebar:
+
 # Create filters for Region and State
 selected_region = st.selectbox('Select Region:', df['Region'].unique())
 selected_state = st.selectbox('Select State:', df['State'].unique())
