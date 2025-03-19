@@ -23,16 +23,16 @@ except KeyError as e:
 except Exception as e:
   st.error(f"An error occurred while creating the chart: {e}")
 
-# Crear un filtro de selección múltiple para la columna 'Region'
-regiones = df['Region'].unique()
-regiones_seleccionadas = st.multiselect('Selecciona una o más regiones', regiones)
+# Create filters for Region and State
+selected_region = st.selectbox('Select Region:', df['Region'].unique())
+selected_state = st.selectbox('Select State:', df['State'].unique())
 
-# Filtrar el dataframe basado en las regiones seleccionadas
-if regiones_seleccionadas:
-    df_filtrado = df[df['Region'].isin(regiones_seleccionadas)]
+# Filter the DataFrame based on selected Region and State
+filtered_df = df[(df['Region'] == selected_region) & (df['State'] == selected_state)]
+
+# Display the filtered results
+if not filtered_df.empty:
+  st.write("Filtered Results:")
+  st.dataframe(filtered_df.head(1))  # Display only the first row
 else:
-    df_filtrado = df
-
-# Mostrar el dataframe filtrado
-st.write('DataFrame Filtrado:')
-st.dataframe(df_filtrado)
+  st.write("No results found for the selected criteria.")
