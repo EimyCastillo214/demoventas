@@ -29,12 +29,6 @@ selected_state = st.selectbox('Select State:', df['State'].unique())
 
 # Filter the DataFrame based on selected Region and State
 filtered_df = df[(df['Region'] == selected_region) & (df['State'] == selected_state)]
-
-# Create a pie chart with the 'Category' column
-try:
-  category_counts = df['Category'].value_counts()
-  fig = px.pie(values=category_counts.values, names=category_counts.index, title='Category Distribution')
-  st.plotly_chart(fig)
   
 # Display the filtered results
 if not filtered_df.empty:
